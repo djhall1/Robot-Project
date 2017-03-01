@@ -47,6 +47,7 @@ public class Robot extends IterativeRobot {
     public static SubMotor ballRegulator;
     public Timer runTimer;
     public static Thread visionThread;
+    public double controllerOutput;
 
 
 
@@ -59,7 +60,7 @@ public class Robot extends IterativeRobot {
     
     	//Instantiate classes
         wheels = new Wheels();
-        intake = new SubMotor(RobotMap.intakeFront, 0.250,-0.250, 0.5,"Forward","Backward");
+        intake = new SubMotor(RobotMap.intakeFront, 0.30,-0.30, 0.5,"Forward","Backward");
         flywheel = new SubMotor(RobotMap.flywheel, 0.5, 0.0, 0.0,"On","Off");
         ballRegulator = new SubMotor(RobotMap.ballRegulator, 1.0, 0.0, 0.0, "On","Off");
         runTimer = new Timer();

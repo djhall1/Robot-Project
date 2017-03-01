@@ -48,13 +48,13 @@ public class SubMotor extends Subsystem {
 				if((runtime.get() - stopTime) < this.delayTime){
 					motor.set(0.0);
 				} else {
-					motor.set(this.intakeFSpeed);
+					motor.pidWrite(this.intakeFSpeed);
 				}
 		} else {
 			if((runtime.get() - stopTime) < this.delayTime){
 				motor.set(0.0);
 			} else{
-				motor.set(this.intakeBSpeed); 
+				motor.pidWrite(this.intakeBSpeed); 
 			}
 		}
 	}

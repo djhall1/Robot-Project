@@ -19,7 +19,8 @@ public class Wheels extends Subsystem {
     private final SpeedController rightFront = RobotMap.wheelsRightFront;
     private final SpeedController rightBack = RobotMap.wheelsRightBack;
     private final RobotDrive robotDrive4 = RobotMap.wheelsRobotDrive4;
-    
+    private boolean driveForward = true;
+	public boolean lastStartStopState;
 
 
     // Put methods for controlling this subsystem
@@ -42,5 +43,26 @@ public class Wheels extends Subsystem {
     	robotDrive4.drive(0,0);
     }
     
+    public void changeDriveState(boolean controllerSSInput, double yRight, double yLeft){
+    	// Change from forward-drive to backward-drive, reverses motors to it's not confusing on the controller itself.
+    	if((controllerSSInput && !lastStartStopState) && (yRight == 0.0 && yLeft == 0)){
+    		if (driveForward){
+    			driveForward = false;
+    		} else {
+    			driveForward = true;
+    		}
+    	}
+    	if(driveForward){
+    		RobotMap.wheelsLeftFront.setInverted(true);
+    		RobotMap.wheelsRightFront.setInverted(true);
+    		RobotMap.wheelsLeftBack.setInverted(false);
+    		RobotMap.wheelsRightBack.setInverted(false);
+    	} else {
+    		RobotMap.wheelsLeftFront.setInverted(false);
+    		RobotMap.wheelsRightFront.setInverted(false);
+    		RobotMap.wheelsLeftBack.setInverted(true);
+    		RobotMap.wheelsRightBack.setInverted(true);
+    	}
+    }
 }
 

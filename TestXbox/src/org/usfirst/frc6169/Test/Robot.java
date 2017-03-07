@@ -178,6 +178,7 @@ public class Robot extends IterativeRobot {
         intake.runMotorLatched(teleOpTimer, oi.getXboxAButton(), oi.getXboxBButton());
         flywheel.runMotorLatched(teleOpTimer, oi.getXboxXButton(), oi.getXboxYButton());
         ballRegulator.runMotorLatched(teleOpTimer, oi.getXboxRBumper(), oi.getXboxLBumper());
+        wheels.changeDriveState(oi.getStartStop(), oi.getXboxYRight(), oi.getXboxYLeft());
         
         //Put information to smart dashboard
 

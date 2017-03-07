@@ -45,6 +45,7 @@ public class Wheels extends Subsystem {
     
     public void changeDriveState(boolean controllerSSInput, double yRight, double yLeft){
     	// Change from forward-drive to backward-drive, reverses motors to it's not confusing on the controller itself.
+    	// Robot has to be completely stopped (No input on left + right Y axis) for drivestate to switch over.
     	if((controllerSSInput && !lastStartStopState) && (yRight == 0.0 && yLeft == 0)){
     		if (driveForward){
     			driveForward = false;

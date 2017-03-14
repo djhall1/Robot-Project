@@ -72,8 +72,8 @@ public class RobotMap {
         wheelsRobotDrive4.setSensitivity(0.5);
         wheelsRobotDrive4.setMaxOutput(1.0);
         
-        wheelsLeftFront.setInverted(true);
-        wheelsRightFront.setInverted(true);
+        //wheelsLeftFront.setInverted(true);
+        //wheelsRightFront.setInverted(true);
         
   
         

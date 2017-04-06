@@ -63,7 +63,7 @@ public class RobotMap {
         intakeFront = new VictorSP(9);
         LiveWindow.addActuator("Intake", "Front", (VictorSP) intakeFront);
         
-        flywheel = new VictorSP(8);
+        flywheel = new VictorSP(7);
         LiveWindow.addActuator("Flywheel", "Front", (VictorSP) flywheel);
                
         ballRegulator = new VictorSP(6); //Currently not connected to anything
@@ -81,6 +81,7 @@ public class RobotMap {
   
         
         intakeFront.setInverted(true);
+        flywheel.setInverted(true);
 
 
 

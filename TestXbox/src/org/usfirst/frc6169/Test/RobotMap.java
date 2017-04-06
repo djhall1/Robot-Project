@@ -63,7 +63,7 @@ public class RobotMap {
         flywheel = new VictorSP(8);
         LiveWindow.addActuator("Flywheel", "Front", (VictorSP) flywheel);
         
-        ballRegulator = new VictorSP(6);
+        //ballRegulator = new VictorSP(6);
         
         
         //Customize the motor configurations

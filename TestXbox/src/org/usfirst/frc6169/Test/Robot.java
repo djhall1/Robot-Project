@@ -76,7 +76,7 @@ public class Robot extends IterativeRobot {
         
         //Instantiate Vision:
 
-        //Vision Processin
+        //Vision Processing
 
         visionThread = new Thread(() -> {
 			// Get the UsbCamera from CameraServer
@@ -87,7 +87,7 @@ public class Robot extends IterativeRobot {
 			// Get a CvSink. This will capture Mats from the camera
 			CvSink cvSink = CameraServer.getInstance().getVideo();
 			// Setup a CvSource. This will send images back to the Dashboard
-			CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
+			CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 320, 240);
 
 			// Mats are very memory expensive. Lets reuse this Mat.
 			Mat mat = new Mat();

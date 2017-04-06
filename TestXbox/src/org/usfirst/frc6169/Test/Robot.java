@@ -35,20 +35,25 @@ import org.usfirst.frc6169.Test.subsystems.*;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
+
+/*
+ * MAIN ROBOT CODE, this is what is run when code is loaded
+ */
+
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
 
-    public static OI oi;
 
-    public static Wheels wheels;
-    public static SubMotor intake;
-    public static SubMotor flywheel;
-    public static SubMotor ballRegulator;
-    public Timer runTimer;
-    public static Thread visionThread;
-    public double controllerOutput;
-
+    public static OI oi; //I/O Class
+    
+    public static Wheels wheels; //Wheel class
+    public static SubMotor intake; //Intake motor class
+    public static SubMotor flywheel; //Flywheel motor class
+    public static SubMotor ballRegulator; //Ball regulator motor class
+    
+    public Timer teleOpTimer; //Global run timer class
+    public static Thread visionThread; //Vision class (used for USB webcam)
 
 
     /**
@@ -57,15 +62,21 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     RobotMap.init();
-    
-    	//Instantiate classes
+
+    	//Instantiate the motor classes
+
         wheels = new Wheels();
-        intake = new SubMotor(RobotMap.intakeFront, 0.30,-0.30, 0.5,"Forward","Backward");
-        flywheel = new SubMotor(RobotMap.flywheel, 1.0, 0.0, 0.0,"On","Off");
+        intake = new SubMotor(RobotMap.intakeFront, 0.40,-0.40, 0.5,"Forward","Backward");
+        flywheel = new SubMotor(RobotMap.flywheel, 0.5, 0.0, 0.0,"On","Off");
         ballRegulator = new SubMotor(RobotMap.ballRegulator, 1.0, 0.0, 0.0, "On","Off");
-        runTimer = new Timer();
-        
-        //Vision Processin
+
+        //Instantiate global Timer class
+        teleOpTimer = new Timer();
+
+        //Instantiate Vision:
+
+        //Vision Processing
+
         visionThread = new Thread(() -> {
 			// Get the UsbCamera from CameraServer
 			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
@@ -75,7 +86,7 @@ public class Robot extends IterativeRobot {
 			// Get a CvSink. This will capture Mats from the camera
 			CvSink cvSink = CameraServer.getInstance().getVideo();
 			// Setup a CvSource. This will send images back to the Dashboard
-			CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
+			CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 320, 240);
 
 			// Mats are very memory expensive. Lets reuse this Mat.
 			Mat mat = new Mat();
@@ -102,22 +113,21 @@ public class Robot extends IterativeRobot {
 		visionThread.setDaemon(true);
 		visionThread.start();
 
-
-        // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
         // constructed yet. Thus, their requires() statements may grab null
         // pointers. Bad news. Don't move it.
+		//Instantiate OI
         oi = new OI();
 
         // instantiate the command used for the autonomous period
 
         autonomousCommand = new AutonomousCommand();
         
-        //Initialize SmartDash
-        
-        SmartDashboard.putString("Intake State", "Null");
-        SmartDashboard.putString("Flywheel State","Null");
-        SmartDashboard.putString("Ball Regulator State","Null");
+        //Initialize Smart Dashboard Objects to be used.
+        SmartDashboard.putString("Intake State", "Null"); //Dashboard object for Intake state
+        SmartDashboard.putString("Flywheel State","Null"); //Dashboard object for Flywheel state
+        SmartDashboard.putString("Ball Regulator State","Null"); //Dashboard object for Bell regulator state
+
 
     }
 
@@ -151,7 +161,8 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        runTimer.start();
+        //Start global teleop timer.
+        teleOpTimer.start();
     }
 
     /**
@@ -160,12 +171,16 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        //Motor Outputs
+
+        //Run Subsystems based on joystick commands
         wheels.takeJoystickInputs(oi.getXboxYLeft(),oi.getXboxYRight());
-        intake.runMotor(runTimer, oi.getXboxAButton(), oi.getXboxBButton());
-        flywheel.runMotor(runTimer, oi.getXboxXButton(), oi.getXboxYButton());
-        ballRegulator.runMotor(runTimer, oi.getXboxRBumper(), oi.getXboxLBumper());
-        //Smart Dashboard Outputs
+        intake.runMotorLatched(teleOpTimer, oi.getXboxAButton(), oi.getXboxBButton());
+        flywheel.runMotorLatched(teleOpTimer, oi.getXboxXButton(), oi.getXboxYButton());
+        ballRegulator.runMotorLatched(teleOpTimer, oi.getXboxRBumper(), oi.getXboxLBumper());
+        wheels.changeDriveState(oi.getStart(), oi.getStop(), oi.getXboxYRight(), oi.getXboxYLeft());
+        
+        //Put information to smart dashboard
+
         SmartDashboard.putString("Intake State", intake.getLatchState());
         SmartDashboard.putString("Flywheel State", flywheel.getLatchState());
         SmartDashboard.putString("Ball Regulator", ballRegulator.getLatchState());

@@ -66,10 +66,9 @@ public class Robot extends IterativeRobot {
     	//Instantiate the motor classes
 
         wheels = new Wheels();
-        intake = new SubMotor(RobotMap.intakeFront, 0.30,-0.30, 0.5,"Forward","Backward");
+        intake = new SubMotor(RobotMap.intakeFront, 0.60,-0.60, 0.5,"Forward","Backward");
         flywheel = new SubMotor(RobotMap.flywheel, 0.5, 0.0, 0.0,"On","Off");
         ballRegulator = new SubMotor(RobotMap.ballRegulator, 1.0, 0.0, 0.0, "On","Off");
-        
 
         //Instantiate global Timer class
         teleOpTimer = new Timer();

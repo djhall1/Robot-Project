@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class RobotMap {
 
     public static SpeedController wheelsLeftFront; //Drive Left Front
-    public static SpeedController wheelsLeftBack; //Drive Lefft Back
+    public static SpeedController wheelsLeftBack; //Drive Left Back
     public static SpeedController wheelsRightFront; //Drive Right Front
     public static SpeedController wheelsRightBack; //Drive Right Back
     public static RobotDrive wheelsRobotDrive4; //Robot Drive subsystem
@@ -57,16 +57,18 @@ public class RobotMap {
         wheelsRobotDrive4 = new RobotDrive(wheelsLeftFront, wheelsLeftBack,
               wheelsRightFront, wheelsRightBack);
        
+        
+        //Subsystems
         intakeFront = new VictorSP(9);
         LiveWindow.addActuator("Intake", "Front", (VictorSP) intakeFront);
         
-        flywheel = new VictorSP(8);
+        flywheel = new VictorSP(7);
         LiveWindow.addActuator("Flywheel", "Front", (VictorSP) flywheel);
+               
+        ballRegulator = new VictorSP(6); //Currently not connected to anything
         
-        //ballRegulator = new VictorSP(6);
         
-        
-        //Customize the motor configurations
+        //Customize the drive motor configurations
         wheelsRobotDrive4.setSafetyEnabled(true);
         wheelsRobotDrive4.setExpiration(0.1);
         wheelsRobotDrive4.setSensitivity(0.5);

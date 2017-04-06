@@ -20,29 +20,43 @@ public class SubMotor extends Subsystem {
 	private double stopTime;
 	private double motorFSpeed; //Speed of the motor (forward)
 	private double motorBSpeed; //Speed of the motor (backward)
+	private double motorSSpeed; //Speed of the motor (Stop)
 	private double delayTime;
 	private String latchedString;
 	private String unlatchedString;
+	private String state2String;
 
 	
 	//-------------------------CONSTRUCTORS
 	//-------------------------------------
-	public SubMotor(SpeedController motor, double latchedSpeed, double unlatchedSpeed, double delayTime,String state0, String state1){
+	public SubMotor(SpeedController motor, double state0Speed, double state1Speed, double delayTime,String state0, String state1){
 		/*
 		 * Constructor for SubMotor Class, used in latched/unlatched state. requires the following inputs:
 		 * 
 		 * SpeedController motor = The single motor controller defined in RobotMap
-		 * double forwardSpeed = Speed of the motor when latched
-		 * double backwardSpeed = Speed of the motor when unlatched
+		 * double state0Speed = Speed of the motor when in state 0
+		 * double state1Speed = Speed of the motor when in state 1
 		 * double delayTime = Delay time between switching b/t latched/unlatched state
 		 * String state0,state1 = String descriptor of latched/unlatched states, to be used in smart dashboard.
 		 */
-		this.motorFSpeed = latchedSpeed;
-		this.motorBSpeed = unlatchedSpeed;
+		this.motorFSpeed = state0Speed;
+		this.motorBSpeed = state1Speed;
 		this.motor = motor;
 		this.delayTime = delayTime;
 		this.latchedString = state0;
 		this.unlatchedString = state1;
+	}
+	
+	public SubMotor(SpeedController motor, double state0Speed, double state1Speed, double state2Speed, double delayTime, String state0, String state1, String state2){
+		
+		this.motorFSpeed = state0Speed;
+		this.motorBSpeed = state1Speed;
+		this.motorSSpeed = state2Speed;
+		this.motor = motor;
+		this.delayTime = delayTime;
+		this.latchedString = state0;
+		this.unlatchedString = state1;
+		this.state2String = state2;
 	}
 	
 	//-------------------------METHODS
@@ -52,7 +66,7 @@ public class SubMotor extends Subsystem {
 		
 	}
 	 
-	public void runMotorLatched(Timer runtime, boolean latchButton, boolean unlatchButton){
+	public void motorTwoStateRun(Timer runtime, boolean state0Button, boolean state1Button){
 		/*
 		 * Run the motor latched/unlatched. Method takes two controller button inputs (as boolean)
 		 * Timer runtime = total runtime of the autonomous/teleop opMode
@@ -61,11 +75,11 @@ public class SubMotor extends Subsystem {
 		 */
 		
 		//Check button status and set latch state
-		if(latchButton){
+		if(state0Button){
 			this.stopTime = runtime.get();
 			this.intakeLatch = true;
 
-		}  else if (unlatchButton){
+		}  else if (state1Button){
 			this.stopTime = runtime.get();
 			this.intakeLatch = false;
 		}
@@ -85,6 +99,10 @@ public class SubMotor extends Subsystem {
 			}
 		}
 	}
+	
+	public void motorThreeStateRun(Timer runtime, boolean state0Button, boolean state2Button, boolean state3Button){
+		
+	}
 	public String getLatchState(){
 		/*
 		 * Return a string of the latch state descriptor, used in smart dashboard
@@ -94,5 +112,9 @@ public class SubMotor extends Subsystem {
 		} else {
 			return this.unlatchedString;
 		}
+	}
+	
+	public void runMotor(double Speed){
+		
 	}
 }

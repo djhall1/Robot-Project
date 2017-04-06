@@ -15,6 +15,7 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -48,9 +49,9 @@ public class Robot extends IterativeRobot {
     public static OI oi; //I/O Class
     
     public static Wheels wheels; //Wheel class
-    public static SubMotor intake; //Intake motor class
-    public static SubMotor flywheel; //Flywheel motor class
-    public static SubMotor ballRegulator; //Ball regulator motor class
+    public static StateMotor intake; //Intake motor class
+    public static StateMotor flywheel; //Flywheel motor class
+    public static StateMotor ballRegulator; //Ball regulator motor class
     
     public Timer teleOpTimer; //Global run timer class
     public static Thread visionThread; //Vision class (used for USB webcam)
@@ -66,9 +67,11 @@ public class Robot extends IterativeRobot {
     	//Instantiate the motor classes
 
         wheels = new Wheels();
-        intake = new SubMotor(RobotMap.intakeFront, 0.40,-0.40, 0.5,"Forward","Backward");
-        flywheel = new SubMotor(RobotMap.flywheel, 0.5, 0.0, 0.0,"On","Off");
-        ballRegulator = new SubMotor(RobotMap.ballRegulator, 1.0, 0.0, 0.0, "On","Off");
+        intake = new StateMotor(RobotMap.intakeFront, 0.4, 0.4, 0.5, oi.getXboxAButton(), oi.getXboxBButton());
+        flywheel = new StateMotor(RobotMap.flywheel, 0.5, 0.0, 0.5, oi.getXboxXButton(), oi.getXboxYButton());
+        ballRegulator = new StateMotor(RobotMap.ballRegulator, 1.0, 0.0, 0.0, oi.getXboxLBumper(), oi.getXboxRBumper());
+        //flywheel = new SubMotor(RobotMap.flywheel, 0.5, 0.0, 0.0,"On","Off");
+        //ballRegulator = new SubMotor(RobotMap.ballRegulator, 1.0, 0.0, 0.0, "On","Off");
 
         //Instantiate global Timer class
         teleOpTimer = new Timer();
@@ -174,16 +177,16 @@ public class Robot extends IterativeRobot {
 
         //Run Subsystems based on joystick commands
         wheels.takeJoystickInputs(oi.getXboxYLeft(),oi.getXboxYRight());
-        intake.runMotorLatched(teleOpTimer, oi.getXboxAButton(), oi.getXboxBButton());
-        flywheel.runMotorLatched(teleOpTimer, oi.getXboxXButton(), oi.getXboxYButton());
-        ballRegulator.runMotorLatched(teleOpTimer, oi.getXboxRBumper(), oi.getXboxLBumper());
+        intake.runMotor();
+        flywheel.runMotor();
+        ballRegulator.runMotor();
         wheels.changeDriveState(oi.getStart(), oi.getStop(), oi.getXboxYRight(), oi.getXboxYLeft());
         
         //Put information to smart dashboard
 
-        SmartDashboard.putString("Intake State", intake.getLatchState());
-        SmartDashboard.putString("Flywheel State", flywheel.getLatchState());
-        SmartDashboard.putString("Ball Regulator", ballRegulator.getLatchState());
+        //SmartDashboard.putString("Intake State", intake.getLatchState());
+        //SmartDashboard.putString("Flywheel State", flywheel.getLatchState());
+        //SmartDashboard.putString("Ball Regulator", ballRegulator.getLatchState());
         
         }
 

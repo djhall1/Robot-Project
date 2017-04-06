@@ -34,6 +34,7 @@ public class RobotMap {
     
     public static SpeedController intakeFront; // intake motor
     public static SpeedController flywheel; //flywheel motor
+
     public static SpeedController ballRegulator; //ball regulator motor
 
 
@@ -62,7 +63,7 @@ public class RobotMap {
         intakeFront = new VictorSP(9);
         LiveWindow.addActuator("Intake", "Front", (VictorSP) intakeFront);
         
-        flywheel = new VictorSP(7);
+        flywheel = new VictorSP(8);
         LiveWindow.addActuator("Flywheel", "Front", (VictorSP) flywheel);
                
         ballRegulator = new VictorSP(6); //Currently not connected to anything

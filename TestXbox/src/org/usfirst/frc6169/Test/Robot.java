@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
 
         //Instantiate global Timer class
         teleOpTimer = new Timer();
-        
+
         //Instantiate Vision:
 
         //Vision Processing

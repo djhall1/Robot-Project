@@ -67,7 +67,7 @@ public class Robot extends IterativeRobot {
 
         wheels = new Wheels();
         intake = new SubMotor(RobotMap.intakeFront, 0.25,-0.25, 0.5,"Backwards","Forwards");
-        flywheel = new SubMotor(RobotMap.flywheel, -0.2, 0.38, 0.0,"Backwards","Forwards");
+        flywheel = new SubMotor(RobotMap.flywheel, -0.2, 0.38, 0.1,"Backwards","Forwards");
         ballRegulator = new SubMotor(RobotMap.ballRegulator, -1.5, 1.5, 0.0, "Forwards","Backwards");
 
         //Instantiate global Timer class
@@ -121,7 +121,7 @@ public class Robot extends IterativeRobot {
 
         // instantiate the command used for the autonomous period
 
-        //autonomousCommand = new AutonomousCommand();
+       // autonomousCommand = new AutonomousCommand();
         
         //Initialize Smart Dashboard Objects to be used.
         SmartDashboard.putString("Intake State", "Null"); //Dashboard object for Intake state

@@ -41,13 +41,6 @@ public class AutonomousCommand extends Command {
     	}
     
     
-    	if(location == 2){
-    		autoTimer.reset();
-    		while(autoTimer.get() < 7){
-    			robotDrive4.drive(0.1, -0.3);
-    		}
-    	}
-    
     }
 
     

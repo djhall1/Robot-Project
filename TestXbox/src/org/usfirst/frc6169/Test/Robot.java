@@ -42,7 +42,7 @@ import org.usfirst.frc6169.Test.subsystems.*;
 
 public class Robot extends IterativeRobot {
 
-    Command autonomousCommand;
+    public static Command autonomousCommand;
 
 
     public static OI oi; //I/O Class
@@ -121,7 +121,7 @@ public class Robot extends IterativeRobot {
 
         // instantiate the command used for the autonomous period
 
-        autonomousCommand = new AutonomousCommand();
+        //autonomousCommand = new AutonomousCommand();
         
         //Initialize Smart Dashboard Objects to be used.
         SmartDashboard.putString("Intake State", "Null"); //Dashboard object for Intake state

@@ -66,9 +66,9 @@ public class Robot extends IterativeRobot {
     	//Instantiate the motor classes
 
         wheels = new Wheels();
-        intake = new SubMotor(RobotMap.intakeFront, 0.40,-0.40, 0.5,"Forward","Backward");
-        flywheel = new SubMotor(RobotMap.flywheel, 0.5, 0.0, 0.0,"On","Off");
-        ballRegulator = new SubMotor(RobotMap.ballRegulator, 1.0, 0.0, 0.0, "On","Off");
+        intake = new SubMotor(RobotMap.intakeFront, 0.25,-0.25, 0.5,"Backwards","Forwards");
+        flywheel = new SubMotor(RobotMap.flywheel, -0.2, 0.38, 0.0,"Backwards","Forwards");
+        ballRegulator = new SubMotor(RobotMap.ballRegulator, -1.5, 1.5, 0.0, "Forwards","Backwards");
 
         //Instantiate global Timer class
         teleOpTimer = new Timer();
@@ -173,7 +173,7 @@ public class Robot extends IterativeRobot {
         
 
         //Run Subsystems based on joystick commands
-        wheels.takeJoystickInputs(oi.getXboxYLeft(),oi.getXboxYRight());
+        wheels.takeJoystickInputs(oi.getXboxYLeft()/1.5 ,oi.getXboxYRight()/1.5);
         intake.runMotorLatched(teleOpTimer, oi.getXboxAButton(), oi.getXboxBButton());
         flywheel.runMotorLatched(teleOpTimer, oi.getXboxXButton(), oi.getXboxYButton());
         ballRegulator.runMotorLatched(teleOpTimer, oi.getXboxRBumper(), oi.getXboxLBumper());

@@ -67,6 +67,7 @@ public class RobotMap {
         LiveWindow.addActuator("Flywheel", "Front", (VictorSP) flywheel);
                
         ballRegulator = new VictorSP(6); //Currently not connected to anything
+        LiveWindow.addActuator("Ball Regulator", "Front", (VictorSP) ballRegulator);
         
         
         //Customize the drive motor configurations
@@ -82,6 +83,7 @@ public class RobotMap {
         
         intakeFront.setInverted(true);
         flywheel.setInverted(true);
+        
 
 
 

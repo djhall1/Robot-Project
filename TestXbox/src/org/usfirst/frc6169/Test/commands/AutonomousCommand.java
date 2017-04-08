@@ -32,14 +32,6 @@ public class AutonomousCommand extends Command {
     public AutonomousCommand() {
     autoTimer.start();
     
-    	if(location == 1 || location == 3){
-    		autoTimer.reset();
-    		while(autoTimer.get() < 3){
-    			robotDrive4.drive(1,0);
-    		}
-    		robotDrive4.drive(0, 0);
-    	}
-    
     
     }
 
@@ -54,6 +46,14 @@ public class AutonomousCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(location == 1 || location == 3){
+    		autoTimer.reset();
+    		while(autoTimer.get() < 3){
+    			robotDrive4.drive(1,0);
+    		}
+    		robotDrive4.drive(0, 0);
+    	}
+    
     }
 
     // Make this return true when this Command no longer needs to run execute()

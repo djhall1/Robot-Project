@@ -163,8 +163,8 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-    	SmartDashboard.getBoolean("Auto. Switch", false);
-        if (autonomousCommand != null && autonomousSwitch) autonomousCommand.start();
+    	autonomousCommand = chooser.getSelected();
+        if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**

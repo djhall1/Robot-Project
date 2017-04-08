@@ -164,15 +164,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	
-        
-    	if(location == 1 || location == 3){
-    		while(autoTimer.get() < 1.2){
-    			wheels.takeJoystickInputs(-1.0, -1.0);
-    		}
-    		while(autoTimer.get() > 1.2001){
-    		wheels.takeJoystickInputs(0,0);}
-    	}
+
     }
 
     public void teleopInit() {

@@ -65,7 +65,9 @@ public class Wheels extends Subsystem {
     		RobotMap.wheelsLeftFront.setInverted(false);
     	}
     }
-  /*  public void driveWheelsStraightFwd(double speed);
-    	robot */
+    public void driveRobotForward(double speed){
+    	robotDrive4.drive(speed, 0); // When we get gyro, we can develop an error-based drive on angle from heading
+    }
+    	
 } 
 

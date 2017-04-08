@@ -65,5 +65,7 @@ public class Wheels extends Subsystem {
     		RobotMap.wheelsLeftFront.setInverted(false);
     	}
     }
-}
+  /*  public void driveWheelsStraightFwd(double speed);
+    	robot */
+} 
 

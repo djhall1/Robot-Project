@@ -43,16 +43,16 @@ public class RobotMap {
 
     	
     	//Instantiate the new motors on init()
-        wheelsLeftFront = new VictorSP(5);
+        wheelsLeftFront = new VictorSP(1);
         LiveWindow.addActuator("Wheels", "LeftFront", (VictorSP) wheelsLeftFront);
         
-        wheelsLeftBack = new VictorSP(3);
+        wheelsLeftBack = new VictorSP(2);
         LiveWindow.addActuator("Wheels", "LeftBack", (VictorSP) wheelsLeftBack);
         
-        wheelsRightFront = new VictorSP(2);
+        wheelsRightFront = new VictorSP(3);
         LiveWindow.addActuator("Wheels", "RightFront", (VictorSP) wheelsRightFront);
         
-        wheelsRightBack = new VictorSP(1);
+        wheelsRightBack = new VictorSP(4);
         LiveWindow.addActuator("Wheels", "RightBack", (VictorSP) wheelsRightBack);
                 
         wheelsRobotDrive4 = new RobotDrive(wheelsLeftFront, wheelsLeftBack,
@@ -60,13 +60,13 @@ public class RobotMap {
        
         
         //Subsystems
-        intakeFront = new VictorSP(9);
+        intakeFront = new VictorSP(6);
         LiveWindow.addActuator("Intake", "Front", (VictorSP) intakeFront);
         
-        flywheel = new VictorSP(7);
+        flywheel = new VictorSP(5);
         LiveWindow.addActuator("Flywheel", "Front", (VictorSP) flywheel);
                
-        ballRegulator = new VictorSP(6); //Currently not connected to anything
+        ballRegulator = new VictorSP(0); //Currently not connected to anything
         LiveWindow.addActuator("Ball Regulator", "Front", (VictorSP) ballRegulator);
         
         
@@ -84,9 +84,6 @@ public class RobotMap {
         intakeFront.setInverted(true);
         flywheel.setInverted(true);
         
-
-
-
 
     }
 }

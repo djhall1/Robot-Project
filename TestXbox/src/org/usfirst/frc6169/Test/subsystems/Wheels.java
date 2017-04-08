@@ -58,11 +58,11 @@ public class Wheels extends Subsystem {
     		this.stopLatch = true;
     	}
     	if(startLatch){
-    		RobotMap.wheelsRightFront.setInverted(true);
-    		RobotMap.wheelsLeftFront.setInverted(true);
-    	} else if (stopLatch){
     		RobotMap.wheelsRightFront.setInverted(false);
     		RobotMap.wheelsLeftFront.setInverted(false);
+    	} else if (stopLatch){
+    		RobotMap.wheelsRightFront.setInverted(true);
+    		RobotMap.wheelsLeftFront.setInverted(true);
     	}
     }
     public void driveRobotForward(double speed){

@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -62,6 +63,8 @@ public class Robot extends IterativeRobot {
 //	public double lTrigger;
 	public int delayCount;
 	public double flyWheelSpeedModifier = 1.0;
+	SendableChooser<Command> chooser = new SendableChooser<>();
+	public boolean autonomousSwitch;
 
 
     /**
@@ -132,12 +135,16 @@ public class Robot extends IterativeRobot {
 
         // instantiate the command used for the autonomous period
 
-        autonomousCommand = new AutonomousCommand("Auto",0.7);
+       // autonomousCommand = new AutonomousCommand("Auto",0.7);
         
         //Initialize Smart Dashboard Objects to be used.
         SmartDashboard.putString("Intake State", "Null"); //Dashboard object for Intake state
         SmartDashboard.putString("Flywheel State","Null"); //Dashboard object for Flywheel state
         SmartDashboard.putString("Ball Regulator State","Null"); //Dashboard object for Bell regulator state
+        chooser.addDefault("Auto Off", null);
+        chooser.addDefault("Straight Auto", new AutonomousCommand("Auto",0.7));
+        SmartDashboard.putData("Auto Mode", chooser);
+        
 
 
     }
@@ -156,7 +163,8 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+    	SmartDashboard.getBoolean("Auto. Switch", false);
+        if (autonomousCommand != null && autonomousSwitch) autonomousCommand.start();
     }
 
     /**

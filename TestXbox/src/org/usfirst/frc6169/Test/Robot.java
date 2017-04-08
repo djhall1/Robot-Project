@@ -132,7 +132,7 @@ public class Robot extends IterativeRobot {
 
         // instantiate the command used for the autonomous period
 
-        //autonomousCommand = new AutonomousCommand();
+        autonomousCommand = new AutonomousCommand("Auto",0.7);
         
         //Initialize Smart Dashboard Objects to be used.
         SmartDashboard.putString("Intake State", "Null"); //Dashboard object for Intake state
@@ -156,15 +156,14 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        autoTimer.start();
-        
+        if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-
+        Scheduler.getInstance().run();
     }
 
     public void teleopInit() {

@@ -74,7 +74,7 @@ public class Robot extends IterativeRobot {
     //	lTrigger = 0;
     	//Instantiate the motor classes    	
         wheels = new Wheels();
-        intake = new SubMotor(RobotMap.intakeFront, 0.25,-0.25, 0.5,"Backwards","Forwards");
+        intake = new SubMotor(RobotMap.intakeFront, 0.27,-0.27, 0.5,"Backwards","Forwards");
         flywheel = new SubMotor(RobotMap.flywheel, -0.2, 0.38, 0.0,"Backwards","Forwards");
         ballRegulator = new SubMotor(RobotMap.ballRegulator, -1.5, 1.5, 0.0, "Forwards","Backwards");
 

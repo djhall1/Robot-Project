@@ -66,7 +66,7 @@ public class SubMotor extends Subsystem {
 		
 	}
 	 
-	public void motorTwoStateRun(Timer runtime, boolean state0Button, boolean state1Button){
+	public void runMotorLatched(Timer runtime, boolean state0Button, boolean state1Button){
 		/*
 		 * Run the motor latched/unlatched. Method takes two controller button inputs (as boolean)
 		 * Timer runtime = total runtime of the autonomous/teleop opMode
